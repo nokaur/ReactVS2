@@ -5,7 +5,8 @@ class Form extends Component {
     super();
     this.state = {
       Username: "",
-      textarea: ""
+      textarea: "",
+      Topic: "React"
     };
   }
   hangleUsernameChange = (event) => {
@@ -18,10 +19,19 @@ class Form extends Component {
       textarea: event.target.value
     });
   };
+  handleTopicChange = (event) => {
+    this.setState({
+      Topic: event.target.value
+    });
+  };
+  handleSubmit = (event) => {
+    alert(`${this.state.Username} ${this.state.textarea} ${this.state.Topic}`);
+    event.preventDefault();
+  };
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div>
           <label>Username: </label>
           <input
@@ -41,11 +51,15 @@ class Form extends Component {
         <br />
         <div>
           <label>Topic:</label>
-          <select>
+          <select value={this.state.Topic} onChange={this.handleTopicChange}>
             <option value="React">React</option>
             <option value="Angular">Angular</option>
             <option value="Javascript">Javascript</option>
           </select>
+        </div>
+        <br />
+        <div>
+          <button>Submit</button>
         </div>
       </form>
     );
